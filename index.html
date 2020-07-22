@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bank website</title>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- custom css -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,16 +13,145 @@
     
 
 
+<div id="login_aria">
+
+<h1>welcome to sokal's parsonal bank</h1>
+<div class="submit_aria">
+<h4>login</h4>
+<input type="text" class="form-control" placeholder="email" required/>
+<input type="password" class="form-control" placeholder="password" required/>
+<button id="login" class="btn btn-success">enter</button>
+</div>
+
+</div>
+
+<!-- login aria end -->
+
+<div id="transection">
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="item1">
+            <h3>Deposit</h3>
+            <h2>$ <span id="courentAmount">00</span> </h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="item2">
+            <h3>withdrow</h3>
+            <h2>$ <span id="withdrowAmount">00</span> </h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="item3">
+            <h3>Belance</h3>
+            <h2>$ <span id="totalBalence">120</span> </h2>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="submit_aria">
+            <h3>Deposit</h3>
+            <input id="depositAmount" type="text" class="form-control status" placeholder="$ Amount you want to Deposit"><br>
+            <button id="addmoney" class="btn btn-success">deposit</button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="submit_aria">
+            <h3>Withdrow</h3>
+            <input id="withdrowMoney" type="text" class="form-control status" placeholder="$ Amount you want to withdrow"><br>
+            <button id="withdrowBtn" class="btn btn-success">withdrow</button>
+        </div>
+    </div>
+</div>
+
+
+</div>
 
 
 
 
+<script>
+
+//login area event 
+const loginBtn = document.getElementById("login");
+loginBtn.addEventListener("click",function(){
+
+const hidearia = document.getElementById("login_aria");
+hidearia.style.display="none";
+
+const transectionAria = document.getElementById("transection");
+
+transectionAria.style.display = "block"
+
+})
+
+//deposit button event 
+
+const depositBtn = document.getElementById("addmoney");
+depositBtn.addEventListener("click",function(){
+
+const depositAmount = document.getElementById("depositAmount").value;
+
+const depositNumber = parseFloat(depositAmount);
+
+// const courentTotalAmount = document.getElementById("courentAmount").innerText;
+// const courentAmountNumber = parseFloat(courentTotalAmount);
+// var total =  depositNumber + courentAmountNumber ;
+// document.getElementById("courentAmount").innerText = total;
+document.getElementById("depositAmount").value = "";
+addBalence("courentAmount",depositNumber)
+addBalence("totalBalence",depositNumber)
+
+})
+
+//withdrow button event 
+
+const withdrowBtn = document.getElementById("withdrowBtn");
+
+withdrowBtn.addEventListener("click",function(){
+
+const withdrowAmount  = document.getElementById("withdrowAmount").innerText;
+const withdrowAmountNumber = parseFloat(withdrowAmount);
+
+const withdrowMoney = document.getElementById("withdrowMoney").value;
+
+const withdrowMoneyNumber = parseFloat(withdrowMoney);
+
+const totalWithdrowMoney = withdrowAmountNumber + withdrowMoneyNumber;
+
+document.getElementById("withdrowAmount").innerText = totalWithdrowMoney;
+
+const newAmount = document.getElementById("totalBalence").innerText;
+
+const newAmountNumber = parseFloat(newAmount);
+
+//console.log(newAmountNumber);
+
+const fullAmount = newAmountNumber - withdrowMoneyNumber;
+
+document.getElementById("totalBalence").innerText = fullAmount;
+
+document.getElementById("withdrowMoney").value = "";
+
+})
 
 
 
+function addBalence(id,depositNumber){
 
+    const totalBalence = document.getElementById(id).innerText;
 
+const totalBalenceNumber = parseFloat(totalBalence);
 
+const totalNewNumber = depositNumber + totalBalenceNumber;
 
+document.getElementById(id).innerText=totalNewNumber;
+
+}
+
+</script>
 </body>
 </html>
